@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body})}">
+
+<body>
+<div class="container-fluid bg-dark text-white p-3 text-center">
+    <h2 class="display-2">Update Hotel</h2>
+</div>
+
+<div class="container-fluid p-5">
+    <form th:action="@{/web/hotels/update/{id}(id=${hotel.id})}" method="post" th:object="${hotel}" class="form-signin">
+        <div class="mb-3">
+            <label for="name" class="form-label">Hotel Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" th:placeholder="${hotel.name}">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" th:field="*{address}" th:placeholder="${hotel.address}">
+        </div>
+        <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" th:field="*{city}" th:placeholder="${hotel.city}">
+        </div>
+        <div class="mb-3">
+            <label for="state" class="form-label">State</label>
+            <input type="text" class="form-control" id="state" th:field="*{state}" th:placeholder="${hotel.state}">
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="country" th:field="*{country}" th:placeholder="${hotel.country}">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" th:field="*{phone}" th:placeholder="${hotel.phone}">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" th:placeholder="${hotel.email}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Hotel</button>
+    </form>
+</div>
+</body>
+</html>

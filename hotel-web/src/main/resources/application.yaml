@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: hotel-web
+server:
+  port: 8100

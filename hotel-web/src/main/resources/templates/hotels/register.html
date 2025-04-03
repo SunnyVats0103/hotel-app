@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body})}">
+<body>
+<div class="container-fluid bg-dark text-white p-3 text-center">
+    <h2 class="display-2">Register Hotel</h2>
+</div>
+
+<div class="container-fluid p-5" th:if="${error} != null">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Hotel Registration Failed!</h4>
+        <p th:text="${error}"></p>
+        <hr>
+        <p class="mb-0">Please try again! If problem persists, contact support.</p>
+    </div>
+</div>
+
+<div class="container-fluid p-5" th:if="${success}">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Hotel Registration Successful!</h4>
+        <hr>
+        <p class="mb-0">You can now view your hotel in the list.</p>
+        <div class="row g-3">
+            <a class="btn btn-outline-dark p-1 col-md-6" th:href="@{${url}}">View Created Hotel</a>
+            <a class="btn btn-outline-dark p-1 col-md-6" th:href="@{/web/hotels/list}">View All Hotels</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-5">
+    <form class="row g-3" th:object="${hotelDto}" th:action="@{/web/hotels/register}" method="post">
+        <div class="col-4">
+            <label for="name" class="form-label">Hotel Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter Hotel Name" required>
+        </div>
+        <div class="col-md-4">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter Email" required>
+        </div>
+        <div class="col-md-4">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="phone" th:field="*{phone}" placeholder="Enter Phone Number">
+        </div>
+        <div class="col-12">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" th:field="*{address}" placeholder="1234 Main St">
+        </div>
+        <div class="col-md-6">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" th:field="*{city}" placeholder="Enter City">
+        </div>
+        <div class="col-md-3">
+            <label for="state" class="form-label">State</label>
+            <select id="state" class="form-select" th:field="*{state}" required>
+                <option th:value="None" selected>Choose...</option>
+                <option th:value="Delhi" th:text="Delhi">State</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="country" class="form-label">Country</label>
+            <select id="country" class="form-select" th:field="*{country}" required>
+                <option th:value="None" selected>Choose...</option>
+                <option th:value="India" th:text="India">Country</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="zipCode" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="zipCode" th:field="*{zipCode}" placeholder="Enter Zip Code">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

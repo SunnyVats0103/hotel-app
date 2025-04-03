@@ -1,0 +1,10 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: demo
+  datasource:
+    url: jdbc:mysql://localhost:3306/hotel_services
+    username: root
+    password: root

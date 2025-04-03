@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: hotel-web
+  devtools:
+    livereload:
+      port: 35730
+server:
+  port: 8200

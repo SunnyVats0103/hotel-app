@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body})}">
+<body>
+<div class="container-fluid bg-dark text-white p-3 text-center">
+    <h2 class="display-2">Hotel Details</h2>
+</div>
+
+<div class="container-fluid p-5" th:if="${error} != null">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Operation Failed!</h4>
+        <p th:text="${error}"></p>
+        <hr>
+        <p class="mb-0">Please try again! If problem persists, contact support.</p>
+    </div>
+</div>
+
+<div class="container-fluid p-5">
+    <a class="btn btn-primary" th:href="@{/web/hotels/list}">View All Hotels</a>
+    <a class="btn btn-primary" th:href="@{/web/hotels/update/{id}(id=${hotel.id})}">Update Hotel</a>
+    <a class="btn btn-danger" th:href="@{/web/hotels/delete/{id}(id=${hotel.id})}">Delete Hotel</a>
+</div>
+
+<div class="container-fluid p-5">
+    <div class="card">
+        <div class="card-header">
+            <h4 th:text="${hotel.name}">Hotel Name</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>City:</strong> <span th:text="${hotel.city}">City</span></p>
+            <p><strong>State:</strong> <span th:text="${hotel.state}">State</span></p>
+            <p><strong>Country:</strong> <span th:text="${hotel.country}">Country</span></p>
+            <p><strong>Phone:</strong> <span th:text="${hotel.phone}">Phone</span></p>
+            <p><strong>Email:</strong> <span th:text="${hotel.email}">Email</span></p>
+        </div>
+        <div class="card-footer">
+            <p><strong>Address:</strong> <span th:text="${hotel.address}">Address</span></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

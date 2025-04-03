@@ -1,0 +1,22 @@
+boot:
+  admin:
+    username: boot-admin
+    password: boot-admin
+
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE
+        data: DEBUG
+
+server:
+  port: 9200
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:hotel_services
+    username: root
+    password: P@ssw0rd
+  jpa:
+    show-sql: true
