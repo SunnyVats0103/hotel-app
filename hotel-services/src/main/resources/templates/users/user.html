@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body}, ${title})}">
+<body>
+<div class="container-fluid bg-dark text-white p-3 text-center">
+    <h2 class="display-2">User Details</h2>
+</div>
+
+<div class="container-fluid p-5">
+    <div class="card">
+        <div class="card-header">
+            <h4 th:text="${user.username}">User</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Email:</strong> <span th:text="${user.email}">Email</span></p>
+            <p><strong>Account Created:</strong> <span th:text="${user.createdAt}">Created</span></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
