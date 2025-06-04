@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "app.init.data",
+      "type": "java.lang.String",
+      "description": "Description for app.init.data."
+    }
+  ]
+}

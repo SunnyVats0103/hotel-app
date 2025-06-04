@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout (~{::body}, ${title})}">
+<body>
+<div class="container-fluid bg-dark text-white p-3 text-center">
+    <h2 class="display-2">Register</h2>
+</div>
+
+<div class="position-fixed top-0 start-50 translate-middle-x mt-5" style="z-index: 1050; width: 90%;" th:if="${errors} != null">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <h4 class="alert-heading">User Registration Failed!</h4>
+        <div th:each="error : ${errors}">
+            <p th:text="${error.errorMessage.toUpperCase} + ' ' + ${error.errorDescription}">Error Details</p>
+        </div>
+        <hr>
+        <p class="mb-0">Please try again! If a problem persists, contact support.</p>
+    </div>
+</div>
+
+<div class="container-fluid p-5" th:if="${success}">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">User Registration Successful!</h4>
+        <div sec:authorize="isAuthenticated() and userType == 'admin'">
+            <hr>
+            <p class="mb-0">View recently registered user.</p>
+            <div class="row g-3">
+                <a class="btn btn-outline-dark column-gap-4"
+                   th:href="@{/secured/web/users/details/{id}(id=${userId})}">View Created User</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-5">
+    <form th:action="@{${userType == 'admin' ? '/secured/web/users/register' : '/public/web/users/register'}}"
+          th:object="${userDto}"
+          method="post"
+          class="form-signin">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" th:field="*{name}" placeholder="Enter Username">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter Password">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter Email">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="phone" th:field="*{phone}" placeholder="Enter Phone Number">
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+        <hr>
+        <p class="mb-0">Already have an account? <a th:href="@{/public/web/login}">Login</a></p>
+    </form>
+</div>
+</body>
+</html>

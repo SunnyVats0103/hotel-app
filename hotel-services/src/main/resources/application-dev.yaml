@@ -1,3 +1,6 @@
+app:
+  init:
+    data: true
 boot:
   admin:
     username: boot-admin
@@ -7,16 +10,29 @@ logging:
   level:
     org:
       springframework:
-        web: TRACE
         data: DEBUG
+        security: DEBUG
 
 server:
   port: 9200
 
 spring:
+  application:
+    name: hotel-services
   datasource:
-    url: jdbc:h2:mem:hotel_services
+    url: jdbc:h2:tcp://localhost:9092//var/tmp/hotel_services
     username: root
     password: P@ssw0rd
+  devtools:
+    livereload:
+      port: 35730
+  h2:
+    console:
+      enabled: true
   jpa:
+    hibernate:
+      ddl-auto: create
     show-sql: true
+    properties:
+      hibernate:
+        default_schema: hotel

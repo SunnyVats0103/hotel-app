@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body}, ${title})}">
+
+<body>
+<div class="container-fluid bg-dark text-white p-3 text-center">
+    <h2 class="display-2">Hotels</h2>
+</div>
+<div class="container-fluid p-5" th:if="${error} != null">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Operation Failed!</h4>
+        <p th:text="${error}"></p>
+        <hr>
+        <p class="mb-0">Please try again! If problem persists, contact support.</p>
+    </div>
+</div>
+<div class="container-fluid p-5">
+    <a class="btn btn-primary"
+       th:href="@{/public/web/hotels/create}">Add New Hotel</a>
+    <a class="btn btn-primary"
+       th:href="@{/public/web/hotels/list}">View Hotels</a>
+</div>
+<div class="container-fluid p-5">
+    <table class="table table-striped">
+        <tr class="table-header">
+            <th>Hotel Name</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+        <tr th:each="hotel : ${hotels}">
+            <td><a th:href="@{/public/web/hotels/details/{id}(id=${hotel.id})}" th:text="${hotel.name}">Hotel Name</a></td>
+            <td th:text="${hotel.city}">City</td>
+            <td th:text="${hotel.country}">Country</td>
+            <td th:text="${hotel.phone}">Phone</td>
+            <td th:text="${hotel.email}">Email</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body}, ${title})}">
+<body>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error!</h4>
+        <hr>
+        <!-- Create paragraphs for every error message in errors of type List<ErrorDTO -->
+        <p th:each="error : ${errors}">
+            <span th:text="${error.errorMessage}"></span>
+        </p>
+    </div>
+</body>
+</html>

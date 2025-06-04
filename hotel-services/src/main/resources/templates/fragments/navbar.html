@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Fragment</title>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark sticky-top" id="homeNav">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Jo Hukkum Hotel</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/public/web/home}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Hotels
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" th:href="@{/public/web/hotels/list}">View Hotels</a></li>
+                            <li><a class="dropdown-item" th:href="@{/public/web/hotels/add}">Add Hotels</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item disabled" href="#">View Bookings</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bookings</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Others
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">Restaurant</a></li>
+                            <li><a class="dropdown-item" href="#">Rooms</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Accounts
+                            <span class="badge bg-danger rounded-pill">Beta</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li sec:authorize="isAuthenticated() and hasAnyAuthority('ADMIN')">
+                                <a class="dropdown-item" href="#">View Accounts</a>
+                            </li>
+                            <li sec:authorize="isAuthenticated() and hasAuthority('CUSTOMER')">
+                                <a class="dropdown-item" href="#">View Account</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/public/web/users/register/customer}">Register Account</a>
+                            </li>
+                            <li sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">
+                                <a class="dropdown-item" th:href="@{/secured/web/users/register/admin}">Register Admin Account</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex mt-3" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+            <!-- Show the login button when not authenticated -->
+            <a sec:authorize="!isAuthenticated()" class="btn btn-primary" th:href="@{/public/web/login}">Login</a>
+
+            <!-- Show user info and logout button when authenticated -->
+            <div sec:authorize="isAuthenticated()" class="d-flex align-items-center">
+                <span class="text-light me-2">Welcome, <span sec:authentication="name">Username</span></span>
+                <form th:action="@{/logout}" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" th:if="${_csrf != null}"/>
+                    <button type="submit" class="btn btn-outline-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
