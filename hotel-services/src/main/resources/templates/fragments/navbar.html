@@ -60,7 +60,7 @@
                                 <a class="dropdown-item" href="#">View Accounts</a>
                             </li>
                             <li sec:authorize="isAuthenticated() and hasAuthority('CUSTOMER')">
-                                <a class="dropdown-item" href="#">View Account</a>
+                                <a class="dropdown-item" th:href="@{/secured/web/users/details/{id}(id=${#authentication.name})}">View Account</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" th:href="@{/public/web/users/register/customer}">Register Account</a>

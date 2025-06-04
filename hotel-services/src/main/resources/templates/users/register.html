@@ -22,10 +22,10 @@
 <div class="container-fluid p-5" th:if="${success}">
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">User Registration Successful!</h4>
-        <div sec:authorize="isAuthenticated() and userType == 'admin'">
+        <div sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">
             <hr>
             <p class="mb-0">View recently registered user.</p>
-            <div class="row g-3">
+            <div class="row g-3" th:test="${userId != null}">
                 <a class="btn btn-outline-dark column-gap-4"
                    th:href="@{/secured/web/users/details/{id}(id=${userId})}">View Created User</a>
             </div>

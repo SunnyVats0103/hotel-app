@@ -25,9 +25,12 @@ public class UserWebController {
     @GetMapping(PUBLIC_URL + "/register/customer")
     public String serveRegisterCustomerPage(Model model) {
         model.addAttribute("title", "Register Customer - WEB");
-        if (!model.containsAttribute("userDto"))
-            model.addAttribute("userDto", UserRegisterDTO.builder().build());
+        model.addAttribute("userDto", UserRegisterDTO.builder().build());
         model.addAttribute("userType", "customer");
+        if (!model.containsAttribute("success")) {
+            model.addAttribute("success", false);
+            model.addAttribute("userId", null);
+        }
         return "users/register";
     }
 
@@ -36,6 +39,10 @@ public class UserWebController {
         model.addAttribute("title", "Register Admin - WEB");
         model.addAttribute("userDto", UserRegisterDTO.builder().build());
         model.addAttribute("userType", "admin");
+        if (!model.containsAttribute("success")) {
+            model.addAttribute("success", false);
+            model.addAttribute("userId", null);
+        }
         return "users/register";
     }
 
@@ -48,7 +55,7 @@ public class UserWebController {
             UserResponseDTO savedCustomer = response.getBody();
             if (savedCustomer != null) rAtt.addFlashAttribute("userId", savedCustomer.getUsername());
         }
-        return "users/register";
+        return "redirect:/public/web/users/register/customer";
     }
 
     @PostMapping(SECURED_URL + "/register")
@@ -60,14 +67,14 @@ public class UserWebController {
             UserResponseDTO savedAdmin = response.getBody();
             if (savedAdmin != null) rAtt.addFlashAttribute("userId", savedAdmin.getUsername());
         }
-        return "users/register";
+        return "redirect:/secured/web/users/register/admin";
     }
 
     @GetMapping(SECURED_URL + "/details/{id}")
     public String userDetails(Model model,
                               @PathVariable("id") String id) {
         model.addAttribute("title", "User Details - WEB");
-        model.addAttribute("user", userEntityController.getUserByUsername(id));
+        model.addAttribute("user", userEntityController.getUserByUsername(id).getBody());
         return "users/user";
     }
 

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body}, ${title})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body}, 'Error - WEB')}">
 <body>
     <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Error!</h4>
         <hr>
         <!-- Create paragraphs for every error message in errors of type List<ErrorDTO -->
-        <p th:each="error : ${errors}">
-            <span th:text="${error.errorMessage}"></span>
-        </p>
+        <p th:text="'Internal Server Error!'">Error Reason</p>
     </div>
 </body>
 </html>
